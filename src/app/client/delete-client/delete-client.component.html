@@ -1,0 +1,13 @@
+
+<div>
+    <mat-drawer-container class="container" autosize >
+        <app-toolbar></app-toolbar>
+        <div align="center">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Indice do cliente a deletar</mat-label>
+                <input matInput type="number" min="0" placeholder="Ex. 1" value="0" #valorIndex>
+            </mat-form-field>
+            <button mat-raised-button color="primary" style="margin-top: 5%;" (click)="deleteClient()">Deletar cliente</button>
+        </div>
+    </mat-drawer-container>
+</div>

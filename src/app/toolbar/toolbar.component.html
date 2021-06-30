@@ -1,0 +1,30 @@
+<p> 
+  <mat-toolbar>
+    <button mat-icon-button class="icon" aria-label="Example icon-button with menu icon" type="button" mat-button (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Client Manager</span>
+    <span class="spacer"></span>
+  </mat-toolbar>
+</p>
+<mat-drawer #drawer class="sidenav" mode="side" style="flex: 1">
+  <div class="div-buttom">
+    <button style="margin-left: 75%;" type="button" mat-icon-button (click)="drawer.toggle()"><mat-icon>close</mat-icon></button>
+  </div>
+  <div class="div-buttom">
+    <a routerLink="/list-client" type="button" mat-button color="principal">Visualizar Clientes</a>
+  </div>
+  <div class="div-buttom">
+    <a routerLink="/register-client" routerLinkActive="active" type="button" mat-button color="primary">Registrar Cliente</a>
+  </div>
+  <div class="div-buttom">
+    <a routerLink="/update-client" type="button" mat-button color="accent">Modificar Cliente</a>
+  </div>
+  <div class="div-buttom">
+    <a routerLink="/delete-client" routerLinkActive="active" type="button" mat-button color="warn">Remover Cliente</a>
+  </div>
+  <div class="div-buttom">
+    <a routerLink="/login" routerLinkActive="active" type="button" mat-button color="darker" (click)="Deslogar()">Sair</a>
+  </div>
+</mat-drawer>
+<router-outlet></router-outlet>

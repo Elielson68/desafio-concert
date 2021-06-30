@@ -1,0 +1,24 @@
+<div align="center" class="container-form">
+  <form  class = "example-form">
+    <h2>LOGIN</h2>
+    <mat-card *ngIf="errorLogin" style="background-color: red;">Login ou senha incorretos!</mat-card>
+    <!-- INPUT DO NOME --> 
+    <mat-form-field  class = "example-full-width"  appearance = "fill" > 
+      <mat-label > Nome </mat-label > 
+      <input type="text" matInput [formControl]="inputFormControl" placeholder = "Ex.: Elielson"  value="" (input)="login = $event.target"> 
+      <mat-error *ngIf="inputFormControl.hasError('required')">
+        Nome é <strong>obrigatório</strong>
+      </mat-error>
+    </mat-form-field >
+    <!-- INPUT DA SENHA --> 
+    <mat-form-field  class = "example-full-width"  appearance = "fill" > 
+        <mat-label > Senha </mat-label > 
+        <input type="password" matInput [formControl]="inputFormControl" placeholder = "Ex.: 244543**"  value="" (input)="senha = $event.target"> 
+        <mat-error *ngIf="inputFormControl.hasError('required')">
+            Senha é <strong>obrigatório</strong>
+        </mat-error>
+    </mat-form-field >
+    <!-- BOTÃO DE REGISTRAR --> 
+    <button mat-raised-button color="primary" style="margin-top: 30%;" (click)="Logar()">Entrar</button>
+  </form>
+</div>

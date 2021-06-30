@@ -1,0 +1,63 @@
+<div align="center" class="container-form">
+  <h2 align="center">{{ nomeFormulario }}</h2>
+  <form  class = "example-form">
+    <!-- INPUT DO NOME --> 
+    <mat-form-field  class = "example-full-width"  appearance = "fill" > 
+      <mat-label > Nome </mat-label > 
+      <input type="text" #inputName  matInput [formControl]="inputFormControl" placeholder = "Ex.: Elielson"  value="" (input)="name = $event.target"> 
+      <mat-error *ngIf="inputFormControl.hasError('required')">
+        Nome é <strong>obrigatório</strong>
+      </mat-error>
+    </mat-form-field >
+    <!-- INPUT DO EMAIL --> 
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="email" #inputEmail matInput [formControl]="inputFormControl" placeholder="Ex. elielson@gmail.com" (input)="email = $event.target">
+        <mat-error *ngIf="inputFormControl.hasError('email') && !inputFormControl.hasError('required')">
+          Por favor, insira um e-mail válido
+        </mat-error>
+        <mat-error *ngIf="inputFormControl.hasError('required')">
+          Email é <strong>obrigatório</strong>
+        </mat-error>
+    </mat-form-field>
+    <!-- INPUT DO TELEFONE --> 
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Telephone</mat-label>
+      <span matPrefix>+55 &nbsp;</span>
+      <input type="tel"  #inputPhone matInput placeholder="(91) 984762085" (input)="phoneNumber = $event.target">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    <!-- SELECT --> 
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label >Possui quantos computadores?</mat-label>
+      <mat-select #computerSelection>
+        <mat-option value="option" (input)="numberComputer = $event.target">Selecionar...</mat-option>
+        <mat-option value="1" >1</mat-option>
+        <mat-option value="2" >2</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- CHECKBOX --> 
+    <div align="left">
+      <mat-checkbox [formControl]="hideRequiredControl" (input)="streamer = $event.target">Gostaria de saber novidades sobre streamers?</mat-checkbox>
+    </div>
+    <!-- RADIO BUTTOM -->
+    <div align="left" style="margin-top: 10px;">
+      <label>Possui animal em casa?</label>
+      <mat-radio-group [formControl]="floatLabelControl" (input)="haveAnimal = $event.target">
+        <mat-radio-button value="sim">Sim</mat-radio-button>
+        <mat-radio-button value="não">Não</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <!-- DATA -->
+    <div align="left" style="margin-top: 10px;">
+      <mat-form-field appearance="fill">
+        <mat-label>Escolha sua data de nascimento</mat-label>
+        <input matInput [matDatepicker]="picker" (input)="data = $event.target">
+        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+        <mat-datepicker #picker ></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <!-- BOTÃO DE REGISTRAR --> 
+    <button mat-raised-button color="primary" style="margin-top: 5%;" (click)="sendData()">{{ buttomName }}</button>
+  </form >
+</div>

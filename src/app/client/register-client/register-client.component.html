@@ -1,0 +1,8 @@
+<div>
+    <mat-drawer-container class="container" autosize >
+        <app-toolbar></app-toolbar>
+        <mat-card *ngIf="errorBool" style="background-color: red;">{{ errorMessageCard }}</mat-card>
+        <mat-card *ngIf="okBool" style="background-color: green;">{{ okMessage }}</mat-card>
+        <app-form-client [buttomName]="buttomName" [nomeFormulario]="nomeDoFormulario" (dataToSend)="onSendData($event)"></app-form-client>
+    </mat-drawer-container>
+</div>

@@ -1,0 +1,14 @@
+
+<div>
+    <mat-drawer-container class="container" autosize >
+        <app-toolbar></app-toolbar>
+        <div align="center">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Indice do cliente a modificar</mat-label>
+                <input matInput type="number" min="0" placeholder="Ex. 1" value="0" #valorIndex>
+            </mat-form-field>
+            <button mat-raised-button color="primary" style="margin-top: 5%;" (click)="searchClient()">Buscar</button>
+        </div>
+        <app-form-client  *ngIf="index != 0" [buttomName]="buttomName" [nomeFormulario]="nomeDoFormulario"></app-form-client>
+    </mat-drawer-container>
+</div>
