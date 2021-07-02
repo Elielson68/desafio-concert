@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { catchError, retry } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
+import { Client } from './model/client.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,21 +22,9 @@ export class ClientService {
   getClients() {
     return this.http.get(`${this.url}/Client`, this.httpOptions);
   }
-  
-  private handleError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong.
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
-    }
-    // Return an observable with a user-facing error message.
-    return throwError(
-      'Something bad happened; please try again later.');
+
+  getClient(id: string) {
+    return this.http.get<Client>(`${this.url}/Client/${id}`, this.httpOptions);
   }
 
   registerClient(client: any){
@@ -48,6 +37,7 @@ export class ClientService {
     }
     return false;
   }
+
   deleteClient(id:any){
     return this.http.delete(`${this.url}/Client/${id}`)
   }

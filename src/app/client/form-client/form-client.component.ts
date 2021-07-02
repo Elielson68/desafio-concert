@@ -1,5 +1,6 @@
 import { Component, ViewChildren, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Client } from '../../client/model/client.model';
 
 @Component({
   selector: 'app-form-client',
@@ -7,43 +8,37 @@ import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms'
   styleUrls: ['./form-client.component.sass']
 })
 export class FormClientComponent {
-  public inputFormControl: any;
-  public options: FormGroup;
-  public hideRequiredControl = new FormControl(false);
-  public floatLabelControl = new FormControl('auto');
-  @ViewChildren("picker") picker!: any;
-  @ViewChildren("computerSelection") computerSelection!: any;
-  name: any;
-  email: any;
-  phoneNumber: any;
-  numberComputer: any;
-  streamer: any;
-  haveAnimal: any;
-  data: any;
+  @Input() public inputFormControl: any;
+  hideRequiredControl = new FormControl(false);
+  floatLabelControl = new FormControl('auto');
+  @Input() formulario!: FormGroup
   @Input() nomeFormulario = "";
   @Input() buttomName = "";
   @Output() dataToSend = new EventEmitter();
-  constructor(private _fb: FormBuilder) { 
-    this.inputFormControl = new FormControl('', [
-      Validators.required,
-      Validators.email,
-    ]);
-    this.options = this._fb.group({
-      hideRequired: this.hideRequiredControl,
-      floatLabel: this.floatLabelControl,
-    });
+  constructor(private formBuilder: FormBuilder) { 
+    this.formulario = this.formBuilder.group({
+      name: [null],
+      email: [null],
+      phoneNumber: [null],
+      numberComputer: [null],
+      alertStreamer: [null],
+      haveAnimal: [null],
+      data: [null]
+    })
   }
+  
 
   sendData(){
-    this.dataToSend.emit({
-      name: this.name.value,
-      email: this.email.value,
-      phoneNumber: `55${this.phoneNumber.value}`,
-      numberComputer: this.computerSelection.first.value,
-      alertStreamer: this.streamer.value == "on"?true:false,
-      haveAnimal: this.haveAnimal.value =="sim"?true:false,
-      data: this.picker.first._model.selection.toString(),
-    })
+    
+    let animal = this.formulario.value.haveAnimal;
+    let date = this.formulario.value?.data;
+    let number = this.formulario.value.phoneNumber;
+
+    this.formulario.value.phoneNumber = "55"+number;
+    this.formulario.value.haveAnimal = animal == "sim" ? true:false;
+    this.formulario.value.data = date.toDateString();
+
+    this.dataToSend.emit(this.formulario.value);
   }
 
 }

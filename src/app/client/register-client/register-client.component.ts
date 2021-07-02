@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from '../client.service';
+import { Client } from '../model/client.model';
 
 @Component({
   selector: 'app-register-client',
@@ -13,15 +15,37 @@ export class RegisterClientComponent implements OnInit {
   public okMessage: string = "Enviado com sucesso!";
   public okBool: boolean = false;
   public errorBool: boolean = false;
-  constructor(private _clientService: ClientService) { }
-
+  formulario!: FormGroup;
+  constructor(private _clientService: ClientService, private formBuilder: FormBuilder) { 
+    this.formulario = this.formBuilder.group({
+      name: [null, Validators.required],
+      email: [null, [Validators.email, Validators.required]],
+      phoneNumber: [null],
+      numberComputer: [null],
+      alertStreamer: [null],
+      haveAnimal: [null],
+      data: [null]
+    })
+  }
+  
+  inputFormControl: any = {
+    name: new FormControl('', [
+      Validators.required
+    ]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ])
+  }
+  
+  
   ngOnInit(): void {
   }
   
   onSendData(evento: any){
     console.log(evento)
     this._clientService.registerClient(evento).subscribe(
-      accept => this.okBool=true,
+      () => this.okBool=true,
       error => {this.errorMessageCard = error.error.errorMessage; this.errorBool=true},
       )
   }
