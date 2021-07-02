@@ -27,25 +27,12 @@ export class RegisterClientComponent implements OnInit {
       data: [null]
     })
   }
-  
-  inputFormControl: any = {
-    name: new FormControl('', [
-      Validators.required
-    ]),
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email,
-    ])
-  }
-  
-  
+
   ngOnInit(): void {
-    console.log(this.formulario.controls['email'])
+
   }
   
   onSendData(evento: any){
-    console.log(evento)
-    console.log(this.formulario.controls['email'])
     this._clientService.registerClient(evento).subscribe(
       () => this.okBool=true,
       error => {this.errorMessageCard = error.error.errorMessage; this.errorBool=true},

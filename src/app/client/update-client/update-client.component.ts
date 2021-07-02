@@ -13,23 +13,14 @@ import { Client } from '../model/client.model';
 export class UpdateClientComponent implements OnInit, AfterViewInit {
   public nomeDoFormulario: string = "Modificar cliente";
   public buttomName: string = "Modificar";
-  inputFormControl: any = {
-    name: new FormControl('', [
-      Validators.required
-    ]),
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email,
-    ])
-  }
   formulario!: FormGroup;
   public index: number = 0;
   @ViewChildren("valorIndex") inputIndex!: any;
 
   constructor(private _clientService: ClientService, private formBuilder: FormBuilder) {
     this.formulario = this.formBuilder.group({
-      name: [null],
-      email: [null],
+      name: [null, Validators.required],
+      email: [null, [Validators.email, Validators.required]],
       phoneNumber: [null],
       numberComputer: [null],
       alertStreamer: [null],

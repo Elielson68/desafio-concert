@@ -3,6 +3,6 @@
         <app-toolbar></app-toolbar>
         <mat-card *ngIf="errorBool" style="background-color: red;">{{ errorMessageCard }}</mat-card>
         <mat-card *ngIf="okBool" style="background-color: green;">{{ okMessage }}</mat-card>
-        <app-form-client [buttomName]="buttomName" [formulario]=formulario [nomeFormulario]="nomeDoFormulario" [inputFormControl]=inputFormControl (dataToSend)="onSendData($event)"></app-form-client>
+        <app-form-client [buttomName]="buttomName" [formulario]=formulario [nomeFormulario]="nomeDoFormulario" (dataToSend)="onSendData($event)"></app-form-client>
     </mat-drawer-container>
 </div>
