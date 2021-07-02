@@ -31,14 +31,18 @@ export class ClientService {
     return this.http.post(`${this.url}/Client`, client, this.httpOptions)
   }
 
+  updateClient(id: string, client: any){
+    return this.http.put(`${this.url}/Client/${id}`, client, this.httpOptions)
+  }
+
+  deleteClient(id:any){
+    return this.http.delete(`${this.url}/Client/${id}`)
+  }
+
   validateLogin(login: string, senha: string): boolean{
     if(login == "concert" && senha == "prova"){
       return true;
     }
     return false;
-  }
-
-  deleteClient(id:any){
-    return this.http.delete(`${this.url}/Client/${id}`)
   }
 }

@@ -36,6 +36,6 @@ export class RegisterClientComponent implements OnInit {
     this._clientService.registerClient(evento).subscribe(
       () => this.okBool=true,
       error => {this.errorMessageCard = error.error.errorMessage; this.errorBool=true},
-      )
+    )
   }
 }

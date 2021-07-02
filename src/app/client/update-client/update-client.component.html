@@ -9,6 +9,8 @@
             </mat-form-field>
             <button mat-raised-button color="primary" style="margin-top: 5%;" (click)="searchClient()">Buscar</button>
         </div>
-        <app-form-client   [buttomName]="buttomName" [formulario]=formulario [nomeFormulario]="nomeDoFormulario"></app-form-client>
+        <mat-card *ngIf="errorBool" style="background-color: red;">{{ errorMessageCard }}</mat-card>
+        <mat-card *ngIf="okBool" style="background-color: green;">{{ okMessage }}</mat-card>
+        <app-form-client *ngIf="index != 0" [buttomName]="buttomName" [formulario]=formulario [nomeFormulario]="nomeDoFormulario" (dataToSend)="onSendData($event)"></app-form-client>
     </mat-drawer-container>
 </div>

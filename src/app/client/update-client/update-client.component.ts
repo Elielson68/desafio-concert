@@ -15,6 +15,10 @@ export class UpdateClientComponent implements OnInit, AfterViewInit {
   public buttomName: string = "Modificar";
   formulario!: FormGroup;
   public index: number = 0;
+  public errorMessageCard: string = "";
+  public okMessage: string = "Enviado com sucesso!";
+  public okBool: boolean = false;
+  public errorBool: boolean = false;
   @ViewChildren("valorIndex") inputIndex!: any;
 
   constructor(private _clientService: ClientService, private formBuilder: FormBuilder) {
@@ -36,23 +40,29 @@ export class UpdateClientComponent implements OnInit, AfterViewInit {
     this.inputIndex.nativeElement;
   }
 
-  onSendData(){
-    
+  onSendData(evento: any){
+    let id: string = this.inputIndex.first.nativeElement.value;
+    this._clientService.updateClient(id, evento).subscribe(
+      () => this.okBool=true,
+      error => {this.errorMessageCard = error.error.errorMessage; this.errorBool=true},
+    )
   }
   
   searchClient(){
     let id: string = this.inputIndex.first.nativeElement.value;
     this.index = parseInt(id);
-    console.log("Entrou aqui")
-    this.formulario.value.name = "sdsadds";
     this._clientService.getClient(id).subscribe(
       (c:Client) => {
-        this.formulario.value.name = "sdsadds";
-        this.formulario.value.name = c.name;
-        this.formulario.value.email = c.email;
-        this.formulario.value.phoneNumber = c.phoneNumber;
-        this.formulario.value.numberComputer = c.numberComputer;
-        this.formulario.value.haveAnimal = c.haveAnimal;
+        this.formulario.setValue({
+          name: c.name,
+          email: c.email,
+          phoneNumber: c.phoneNumber,
+          numberComputer: c.numberComputer,
+          alertStreamer: c.alertStreamer,
+          haveAnimal: c.haveAnimal ? "sim":"não",
+          data: new Date(c.data)
+
+        })
       }
     )
     
