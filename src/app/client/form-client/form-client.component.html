@@ -2,10 +2,10 @@
   <h2 align="center">{{ nomeFormulario }}</h2>
   <form  class = "example-form" [formGroup]=formulario>
     <!-- INPUT DO NOME --> 
-    <mat-form-field  class = "example-full-width"  appearance = "fill" > 
+    <mat-form-field  class = "example-full-width" appearance = "fill" > 
       <mat-label > Nome </mat-label > 
-      <input type="text" formControlName="name" matInput placeholder="Ex.: Elielson"> 
-      <mat-error>
+      <input type="text" formControlName="name" matInput  placeholder="Ex.: Elielson"> 
+      <mat-error >
         Nome é <strong>obrigatório</strong>
       </mat-error>
     </mat-form-field >
@@ -13,10 +13,10 @@
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Email</mat-label>
         <input type="email" formControlName="email" matInput placeholder="Ex. elielson@gmail.com">
-        <mat-error>
+        <mat-error *ngIf="formulario.controls['email'].errors?.email">
           Por favor, insira um e-mail válido
         </mat-error>
-        <mat-error>
+        <mat-error *ngIf="formulario.controls['email'].errors?.required">
           Email é <strong>obrigatório</strong>
         </mat-error>
     </mat-form-field>
